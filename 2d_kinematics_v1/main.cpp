@@ -15,15 +15,15 @@ double vx = v * cos(theta * 3.14159265358979323846 / 180);
 double vy = v * sin(theta * 3.14159265358979323846 / 180);
 
 double updateX(double x, double velocityX) {
-  x = x + velocityX * dt;
+  x += velocityX * dt;
   vx = velocityX;
   return x;
 }
 
 double updateY(double y, double velocityY) {
-  velocityY = velocityY - gravity * dt;
+  velocityY -= gravity * dt;
   vy = velocityY;
-  y = y + velocityY * dt;
+  y += velocityY * dt;
   return y;
 }
 
@@ -33,6 +33,5 @@ int main () {
     y = updateY(y, vy);
     std::cout << "X: " << x << "\nY: " << y << "\n";
   }
-
   return 0;
 }
