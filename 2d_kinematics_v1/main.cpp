@@ -7,6 +7,7 @@ double dt = 0.01;
 
 double x = 0;
 double y = 0;
+double t = 0;
 
 double v = 10;
 double theta = 30;
@@ -29,9 +30,11 @@ double updateY(double y, double velocityY) {
 
 int main () {
   while (y >= 0) {
+    t += dt;
     x = updateX(x, vx);
     y = updateY(y, vy);
     std::cout << "X: " << x << "\nY: " << y << "\n";
   }
+  std::cout << "Total time: " << t << " seconds.\n";
   return 0;
 }
