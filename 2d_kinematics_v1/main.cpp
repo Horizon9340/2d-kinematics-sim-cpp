@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 
+//define variables
 double const gravity = 9.81;
 double dt = 0.01;
 
@@ -15,12 +16,14 @@ double theta = 30;
 double vx = v * cos(theta * 3.14159265358979323846 / 180);
 double vy = v * sin(theta * 3.14159265358979323846 / 180);
 
+//update x position
 double updateX(double x, double velocityX) {
   x += velocityX * dt;
   vx = velocityX;
   return x;
 }
 
+//update y position
 double updateY(double y, double velocityY) {
   velocityY -= gravity * dt;
   vy = velocityY;
@@ -28,6 +31,7 @@ double updateY(double y, double velocityY) {
   return y;
 }
 
+//main function that runs
 int main () {
   while (y >= 0) {
     t += dt;
