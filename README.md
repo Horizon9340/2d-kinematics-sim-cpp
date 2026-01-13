@@ -18,3 +18,5 @@ The second version of the simulation will be much cleaner and more optimized. Af
 
 ## Learning OpenGL ([link](learn-opengl))
 I chose OpenGL to be the graphis API that I would learn graphic modeling with. This will likely be the most complex thing I've done thus far.
+
+The current output of the program right now is just a dark screen with nothing in it. I am currently learning the basics of OpenGL and I am testing to see if it works on my MacBook.
