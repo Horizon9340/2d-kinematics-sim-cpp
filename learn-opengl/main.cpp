@@ -83,7 +83,7 @@ int main() {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
   // Create a window (also creates OpenGL context)
-  GLFWwindow* window = glfwCreateWindow(800,600, "Learn OpenGL - A Single Damn Dot", nullptr, nullptr);
+  GLFWwindow* window = glfwCreateWindow(800,600, "Learn OpenGL - Four Dots I Guess", nullptr, nullptr);
   if (!window) {
     std::cerr << "Failed to create GLFW window\n";
     glfwTerminate();
@@ -110,22 +110,25 @@ int main() {
   // --- 1) Shaders (absolute minimum) ---
   const char* vertexShaderSrc = R"GLSL(
     #version 410 core
-    layout (location = 0) in vec2 aPos;
+    layout (location = 0) in vec2 aPos; //position
+    layout (location = 1) in vec3 aColor; //colors
+
+    out vec3 vColor;
 
     void main () {
-      gl_Position = vec4(aPos, 0.0, 1.0);
-
-      // Controls point size in core profile
+      gl_Position = vec4(aPos.x, aPos.y, 0.0, 1.0);
       gl_PointSize = 18.0;
+      vColor = aColor;
     }
   )GLSL";
 
   const char* fragmentShaderSrc = R"GLSL(
     #version 410 core
+    in vec3 vColor;
     out vec4 FragColor;
 
     void main () {
-      FragColor = vec4(1.0, 0.9, 0.2, 1.0); // like yellow-ish
+      FragColor = vec4(vColor, 1.0); //allows for individual colors
     }
   )GLSL";
 
@@ -138,7 +141,12 @@ int main() {
 
   // --- 2) Vertex data: literally one point at the center of the screen ---
   float point[] = {
-    0.0f, 0.0f
+    // Each row is a point. Each point has floats (x, y, r, g, b)
+    // x and y are positions, r, g, and b control color
+    -0.3f, 0.0f, 1.0f, 0.0f, 0.0f,
+    0.3f, 0.0f, 0.0f, 1.0f, 0.0f,
+    0.0f, -0.3f, 0.0f, 0.0f, 1.0f,
+    0.0f, 0.3f, 1.0f, 1.0f, 0.0f,
   };
 
   // --- 3) VAO and VBO setup stuff ---
@@ -151,9 +159,13 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glBufferData(GL_ARRAY_BUFFER, sizeof(point), point, GL_STATIC_DRAW);
 
-  // aPos is location = 0, it has 2 floats (x,y)
-  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+  // Position (location 0): 2 floats, stride 5 floats, offset 0
+  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
+
+  // Color (location 1): 3 floats, stride 5 floats, offset 2 floats
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+  glEnableVertexAttribArray(1);
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
@@ -169,7 +181,7 @@ int main() {
 
     glUseProgram(program);
     glBindVertexArray(vao);
-    glDrawArrays(GL_POINTS, 0, 1); // <-- THIS IS THE DOT
+    glDrawArrays(GL_POINTS, 0, 4); // <-- FUNNY PLACE WHERE STUFF IS DISPLAYED (DOTS)
     glBindVertexArray(0);
     
     glfwSwapBuffers(window);
