@@ -6,6 +6,7 @@
 
 // Frame buffer or whatever
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height){
+  (void)window;
   glViewport(0, 0, width, height);
 }
 
@@ -41,7 +42,7 @@ static GLuint createProgram(const char* vsSrc, const char* fsSrc) {
     glDeleteShader(vs);
     return 0;
   }
-  
+
   // Actually make program
   GLuint prog = glCreateProgram();
   glAttachShader(prog, vs);
@@ -83,7 +84,7 @@ int main() {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
   // Create a window (also creates OpenGL context)
-  GLFWwindow* window = glfwCreateWindow(800,600, "Learn OpenGL - Four Dots I Guess", nullptr, nullptr);
+  GLFWwindow* window = glfwCreateWindow(800,600, "Learn OpenGL - Five Dots I Guess", nullptr, nullptr);
   if (!window) {
     std::cerr << "Failed to create GLFW window\n";
     glfwTerminate();
@@ -147,6 +148,7 @@ int main() {
     0.3f, 0.0f, 0.0f, 1.0f, 0.0f,
     0.0f, -0.3f, 0.0f, 0.0f, 1.0f,
     0.0f, 0.3f, 1.0f, 1.0f, 0.0f,
+    0.0f, 0.0f, 0.33f, 0.10f, 0.55f,
   };
 
   // --- 3) VAO and VBO setup stuff ---
@@ -181,7 +183,7 @@ int main() {
 
     glUseProgram(program);
     glBindVertexArray(vao);
-    glDrawArrays(GL_POINTS, 0, 4); // <-- FUNNY PLACE WHERE STUFF IS DISPLAYED (DOTS)
+    glDrawArrays(GL_POINTS, 0, 5); // <-- FUNNY PLACE WHERE STUFF IS DISPLAYED (DOTS)
     glBindVertexArray(0);
     
     glfwSwapBuffers(window);
