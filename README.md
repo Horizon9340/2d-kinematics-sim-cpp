@@ -13,10 +13,12 @@ For example:
 
 Another problem present in the code is that there are duplicate names, meaning that the name of a global variable matches the name of a local variable, such as `x`. This can cause both confusion and bugs when scaled. My functions also have mixed responsibilites. For example, my functions that update position also secretly access and change velocities. Again, this can cause confusion and problems later. 
 
-## Version 2 ([link](2d_kinematics_v2))
-The second version of the simulation will be much cleaner and more optimized. After that, I will work on displaying data in a visual way.
-
 ## Learning OpenGL ([link](learn-opengl))
-I chose OpenGL to be the graphis API that I would learn graphic modeling with. This will likely be the most complex thing I've done thus far.
+The ultimate goal I had with the project of creating a 2D kinematics simulation was to learn the basic concepts needed to program a simulation, and then to learn to display it. I chose OpenGL to be the graphis API that I would learn graphic modeling with to display my simulations. This will likely be the most complex thing I've done thus far.
 
-The current output of the program right now is just a dark screen with nothing in it. I am currently learning the basics of OpenGL and I am testing to see if it works on my MacBook.
+So far, I have learned a lot about the inner workings of computer graphics. I now understand the fundamentals of how OpenGL talks to the GPU, including the vertex and fragment shaders' roles, how each works together to display pixels, rasterization, shader code in GLSL, VBOs and VAOs, and how to program objects to actually be displayed. Right now, I have learned how to display several dots with a 2D position (x,y) and each with an individual color (r,g,b).
+
+I had to import the [glad](learn-opengl/glad) library and understand GLFW. I also learned how to create a [makefile](learn-opengl/makefile) to compile my programs much faster and more efficiently.
+
+## Version 2 ([link](2d_kinematics_v2))
+The second version of the simulation will be much cleaner and more optimized. It will be my first simulation with a real display, and I will be using OpenGL to create it.
