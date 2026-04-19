@@ -2,7 +2,7 @@
 #include <string>
 
 #include "glad/glad.h"
-#include <GLFW/glfw3.h>
+#include </opt/homebrew/include/GLFW/glfw3.h> // I had to include the entire fucking file path because it wouldn't stop whining.
 
 // Frame buffer or whatever
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height){
@@ -10,16 +10,16 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
   glViewport(0, 0, width, height);
 }
 
-// Getting shaders and stuff
+// Function to compile shaders
 static GLuint compileShader(GLenum type, const char* src){
   GLuint shader = glCreateShader(type);
   glShaderSource(shader, 1, &src, nullptr);
   glCompileShader(shader);
 
-  // Error for shader compile
-  GLint ok = 0;
-  glGetShaderiv(shader, GL_COMPILE_STATUS, &ok);
-  if (!ok) {
+  // Error message for shader compile
+  GLint okay = 0;
+  glGetShaderiv(shader, GL_COMPILE_STATUS, &okay);
+  if (!okay) {
     GLint len = 0;
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
     std::string log(len, '\0');
@@ -33,11 +33,11 @@ static GLuint compileShader(GLenum type, const char* src){
 
 // Making the program for shaders
 static GLuint createProgram(const char* vsSrc, const char* fsSrc) {
-  GLuint vs = compileShader(GL_VERTEX_SHADER, vsSrc);
+  GLuint vs = compileShader(GL_VERTEX_SHADER, vsSrc); // Actually making the vertex shader
   if (!vs) {
     return 0;
   }
-  GLuint fs = compileShader(GL_FRAGMENT_SHADER, fsSrc);
+  GLuint fs = compileShader(GL_FRAGMENT_SHADER, fsSrc); // Actually making the fragment shader
   if (!fs) {
     glDeleteShader(vs);
     return 0;
@@ -52,15 +52,15 @@ static GLuint createProgram(const char* vsSrc, const char* fsSrc) {
   glDeleteShader(vs);
   glDeleteShader(fs);
 
-  // Error for program link
-  GLint ok = 0;
-  glGetProgramiv(prog, GL_LINK_STATUS, &ok);
-  if (!ok) {
+  // Error message for program link
+  GLint okay = 0;
+  glGetProgramiv(prog, GL_LINK_STATUS, &okay);
+  if (!okay) {
     GLint len = 0;
     glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &len);
     std::string log(len, '\0');
     glGetProgramInfoLog(prog, len, nullptr, log.data());
-    std::cerr << "Program link failed" << log << "\n";
+    std::cerr << "Program link failed:\n" << log << "\n";
     glDeleteProgram(prog);
     return 0;
   }
@@ -84,7 +84,7 @@ int main() {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
   // Create a window (also creates OpenGL context)
-  GLFWwindow* window = glfwCreateWindow(800,600, "Learn OpenGL - Five Dots I Guess", nullptr, nullptr);
+  GLFWwindow* window = glfwCreateWindow(800,600, "Learn OpenGL - Triangles", nullptr, nullptr);
   if (!window) {
     std::cerr << "Failed to create GLFW window\n";
     glfwTerminate();
@@ -140,15 +140,16 @@ int main() {
     return 1;
   }
 
-  // --- 2) Vertex data: literally one point at the center of the screen ---
-  float point[] = {
+  // --- 2) Vertex data: literally one damn triangle at the center of the screen ---
+  float vertices[] = {
     // Each row is a point. Each point has floats (x, y, r, g, b)
     // x and y are positions, r, g, and b control color
-    -0.3f, 0.0f, 1.0f, 0.0f, 0.0f,
-    0.3f, 0.0f, 0.0f, 1.0f, 0.0f,
-    0.0f, -0.3f, 0.0f, 0.0f, 1.0f,
-    0.0f, 0.3f, 1.0f, 1.0f, 0.0f,
-    0.0f, 0.0f, 0.33f, 0.10f, 0.55f,
+    
+    -0.3f, -0.3f, 1.0f, 0.0f, 0.0f,
+    0.0f, 0.3f, 0.0f, 1.0f, 0.0f,
+    0.3f, -0.3f, 0.0f, 0.0f, 1.0f,
+    
+    
   };
 
   // --- 3) VAO and VBO setup stuff ---
@@ -159,7 +160,7 @@ int main() {
   glBindVertexArray(vao);
 
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(point), point, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
   // Position (location 0): 2 floats, stride 5 floats, offset 0
   glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
@@ -183,7 +184,7 @@ int main() {
 
     glUseProgram(program);
     glBindVertexArray(vao);
-    glDrawArrays(GL_POINTS, 0, 5); // <-- FUNNY PLACE WHERE STUFF IS DISPLAYED (DOTS)
+    glDrawArrays(GL_TRIANGLES, 0, 3); // <-- FUNNY PLACE WHERE STUFF IS DISPLAYED (TRIANGLES)
     glBindVertexArray(0);
     
     glfwSwapBuffers(window);

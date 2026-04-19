@@ -16,7 +16,7 @@ Another problem present in the code is that there are duplicate names, meaning t
 ## Learning OpenGL ([link](learn-opengl))
 The ultimate goal I had with the project of creating a 2D kinematics simulation was to learn the basic concepts needed to program a simulation, and then to learn to display it. I chose OpenGL to be the graphis API that I would learn graphic modeling with to display my simulations. This will likely be the most complex thing I've done thus far.
 
-So far, I have learned a lot about the inner workings of computer graphics. I now understand the fundamentals of how OpenGL talks to the GPU, including the vertex and fragment shaders' roles, how each works together to display pixels, rasterization, shader code in GLSL, VBOs and VAOs, and how to program objects to actually be displayed. Right now, I have learned how to display several dots with a 2D position (x,y) and each with an individual color (r,g,b).
+So far, I have learned a lot about the inner workings of computer graphics. I now understand the fundamentals of how OpenGL talks to the GPU, including the vertex and fragment shaders' roles, how each works together to display pixels, rasterization, shader code in GLSL, VBOs and VAOs, and how to program objects to actually be displayed. I learned how to display several dots with a 2D position (x,y) and each with an individual color (r,g,b), and then I learned how to create triangles with color-independent points.
 
 I had to import the [glad](learn-opengl/glad) library and understand GLFW. I also learned how to create a [makefile](learn-opengl/makefile) to compile my programs much faster and more efficiently.
 

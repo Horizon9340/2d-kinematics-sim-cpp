@@ -1,8 +1,8 @@
 CC := clang
 CXX := clang++
 
-CFLAGS := -Iglad/include
-CXXFLAGS := -std=c++17 -Wall -Wextra -Iglad/include -I$(shell brew --prefix)/include
+CFLAGS := -Iglad/include -I/opt/homebrew/include
+CXXFLAGS := -std=c++17 -Wall -Wextra -Iglad/include -I/opt/homebrew/include
 
 LDFLAGS := -L$(shell brew --prefix)/lib -lglfw \
 	-framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
