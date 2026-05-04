@@ -22,3 +22,9 @@ I had to import the [glad](learn-opengl/glad) library and understand GLFW. I als
 
 ## Version 2 ([link](2d_kinematics_v2))
 The second version of the simulation will be much cleaner and more optimized. It will be my first simulation with a real display, and I will be using OpenGL to create it.
+
+
+
+
+# UPDATE: Repo on hold
+Busyness of life has kept me from building the simulation I wanted to create, and now I am going to shift my focus towards gaining a more thorough understanding of OpenGL before I jump into simulation work.
