@@ -2,7 +2,7 @@
 #include <string>
 
 #include "glad/glad.h"
-#include </opt/homebrew/include/GLFW/glfw3.h> // I had to include the entire fucking file path because it wouldn't stop whining.
+#include <GLFW/glfw3.h> 
 
 // Frame buffer or whatever
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height){
